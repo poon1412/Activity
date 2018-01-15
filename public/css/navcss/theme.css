@@ -1,0 +1,109 @@
+/* header */
+.hav {
+  font-family: 'appfont';
+  position: fixed;
+  height: 42px;
+  background-color: #333;
+  border-bottom: 2px solid #212121;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -moz-transition: top .2s;
+  -webkit-transition: top .2s;
+  transition: top .2s;
+  -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5);
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,0.5);
+}
+/* end header */
+/* lodo */
+@media (max-width:767px) {
+	.logo {
+		width:200px
+	}
+}
+.zpoq {
+	display:block;
+	height:40px
+}
+@media (min-width:768px) {
+	.zpoq {
+		float:left;
+		width:95px
+	}
+}
+.agln {
+	position:absolute;
+	top:-52px;  /*ชิดขอบบน*/
+	-moz-transition:all .2s cubic-bezier(.175,.885,.32,1.275);
+	-webkit-transition:all .2s cubic-bezier(.175,.885,.32,1.275);
+	transition:all .2s cubic-bezier(.175,.885,.32,1.275); /* เด้งสวย ๆ */
+	border-radius:0 0 5px 5px;
+	border:2px solid transparent;
+	display:inline-block
+}
+.agln .rjy {
+	display:block
+}
+@media (min-width:768px) {
+	.qyao .agln:after {
+		content:'18UP';
+		position:absolute;
+		bottom:25px;
+		right:5px;
+		background:#930000;
+		border-radius:2px;
+		color:#fff;
+		font-weight:700;
+		font-size:11px;
+		padding:0 2px
+	}
+	.agln:hover {
+		top:-2px;
+		background:#ffaf80; /* bg logo */
+		border-color:#333;  /* border */
+		-moz-box-shadow:0 0 6px 0 rgba(0,0,0,0.5);
+		-webkit-box-shadow:0 0 6px 0 rgba(0,0,0,0.5);
+		box-shadow:0 0 6px 0 rgba(0,0,0,0.5)
+	}
+	.qyao .agln:hover {
+		background:#ff8686
+	}
+}
+.rjy {
+	display:inline-block;
+	background-image:url("../img/free_sailor_uniform_miku_pagedoll_by_rimuu-d8fzapk.png"); /* pic logo  //f.2th.me/public/src/sprite/olwn7j.png */
+	position:relative;
+	background-size:90px 130px; /* width hight */
+}
+.jgze .rjy {
+	vertical-align:middle
+}
+.gojy { /* ขนาดรูปในกรอบ */
+	width:90px;
+	height:90px;
+	background-position:0 -138px
+}
+/* end logo */
+/*modal login*/
+.w3-teal,.w3-hover-teal:hover{
+  color:#131212!important;
+  background-color:#fff!important;
+}
+.w3-large{font-size:18px!important} /*size x*/
+.w3-display-topright{position:absolute;right:0;top:0}
+.w3-modal{z-index:3;display:none;padding-top:100px;position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4)}
+.w3-animate-opacity{animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1}}
+
+.w3-modal-content {
+    margin: auto;
+    background-color: #fff;
+    position: relative;
+    padding: 0;
+    outline: 0;
+    width: 380px;
+}

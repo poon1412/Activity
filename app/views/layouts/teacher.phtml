@@ -1,0 +1,102 @@
+<nav class="navbar navbar-default">
+  <div class="container w-nav">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <?php echo $this->tag->linkTo(["home", "SwEtc.","class"=>"navbar-brand"]); ?>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><?php echo $this->tag->linkTo(["teacher/activityList", "รายการกิจกรรม"]); ?></li>
+
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">นักศึกษา <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><?php echo $this->tag->linkTo(["teacher/showstd/1", "ชั้นปีที่ 1"]); ?></li>
+            <li><?php echo $this->tag->linkTo(["teacher/showstd/2", "ชั้นปีที่ 2"]); ?></li>
+            <li><?php echo $this->tag->linkTo(["teacher/showstd/3", "ชั้นปีที่ 3"]); ?></li>
+            <li><?php echo $this->tag->linkTo(["teacher/showstd/4", "ชั้นปีที่ 4"]); ?></li>
+            <li><?php echo $this->tag->linkTo(["teacher/showstd/5", "ชั้นปีอื่น ๆ"]); ?></li>
+          </ul>
+        </li>
+        <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img class="profile" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg">
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                      <?php $teacher=Teacher::findFirstByidTeacher( $this->session->get("login")); ?>
+                                        <p class="text-center">
+                                            <img class="img-profile" src="">
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="text-left"><strong><?php echo $teacher->Title." ".$teacher->FirstName." ".$teacher->LastName ?></strong></p>
+                                        <p class="text-left small">
+                                          <?php if ($teacher->status==1)
+                                                  echo "ADMIN";
+                                                else
+                                                  echo "TEACHER";
+                                         ?></p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="navbar-login navbar-login-session">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                          <li class="btn btn-danger btn-block"><?php echo $this->tag->linkTo(["login/logout", "ออกจากระบบ"]) ?></li>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <form class="navbar-form navbar-right">
+
+
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class= "container w-nav hero">
+  <?php $this->flashSession->output() ?>
+<?php echo $this->getContent(); ?>
+</div>
+<!-- <?php $this->flashSession->output() ?> -->
+<!-- <li class="btn btn-success"><?php echo $this->tag->linkTo(["home", "กลับสู่หน้าหลัก"]) ?></li> -->
+
+<footer class="container-fluid text-center bg-lightgray">
+
+        <div class="copyrights" style="margin-top:25px;">
+            <p>Phalcon project © 2016, All Rights Reserved
+                <br>
+                <span>Web Design By: Who!</span></p>
+            <p><?php echo $this->tag->linkTo(["home", "Home"]) ?></p>
+        </div>
+</footer>

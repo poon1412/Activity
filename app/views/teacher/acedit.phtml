@@ -1,0 +1,198 @@
+<div class="white">
+
+  <?php
+    echo $this->tag->form(
+        [
+          "teacher/acsave/".$idActivity,
+          "autocomplete" => "off",
+          "class" => "form-horizontal"
+        ] );
+  ?>
+
+
+   <!-- upload pic -->
+
+  <div class="showimg">
+      <img id="blah" src="files[0]" />
+  </div>
+
+  <script>
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+      $('#blah').attr('src',e.target.result);
+    }
+      reader.readAsDataURL(input.files[0]);
+
+    }
+    }
+
+  $("#imgInp").change(function(){
+  readURL(this);
+  });
+
+  // old default pic
+
+    // var loadFile = function(event) {
+    //   var output = document.getElementById('output');
+    //   output.src = URL.createObjectURL(event.target.files[0]);
+    //
+    // };
+  </script>
+
+  <div class="form-group">
+    <div class="col-md-4 pull-right">
+        <input type='file' id="imgInp" />
+  </div>
+  </div>
+
+
+
+
+  <!-- end upload pic -->
+<?php $activity = Activity::findFirstByidActivity($idActivity); $teachers = Teacher::find()?>
+
+  <div class="container-fluid">
+    <div class="page-header">
+      <center><h3>กิจกรรมเสริมหลักสูตร</h3></center>
+    </div>
+
+  <div class="col-md-12 col-md-offset-2">
+  <div class="form-group">
+      <label for="fieldName" class="col-sm-2 control-label">ชื่อกิจกรรม</label>
+      <div class="col-sm-6">
+        <?php echo $this->tag->textField(["nameAc", "size" => 30, "class" => "form-control", "id" =>"fieldName", "required" =>"", "placeholder" =>"ชื่อกิจกรรม"]) ?>
+      </div>&nbsp;<font color="red" size="5">*</font>
+  </div>
+
+  <div class="form-group">
+      <label for="fieldName" class="col-sm-2 control-label">รายละเอียดกิจกรรม</label>
+      <div class="col-sm-6">
+        <?php echo $this->tag->textarea(["detail", "size" => 30, "class" => "form-control", "id" =>"fieldName", "required" =>"", "placeholder" =>"คำอธิบายรายละเอียดกิจกรรม"]) ?>
+      </div>&nbsp;<font color="red" size="5">*</font>
+  </div>
+
+  <div class="form-group">
+  <label for="fieldPrice" class="col-sm-2 control-label">ภาคการศึกษา</label>
+          <div class="col-sm-3">
+        <select name="semeter" id="year" class="form-control" required>
+        <option selected disabled value="">เลือกภาคการศึกษา</option>
+        <option value="1" <?php if ($activity->Yearofeducation_Semester==1) echo "selected" ?>>1</option>
+        <option value="2" <?php if ($activity->Yearofeducation_Semester==2) echo "selected" ?>>2</option>
+        <option value="3" <?php if ($activity->Yearofeducation_Semester==3) echo "selected" ?>>3</option>
+        </select>
+    </div>
+    <div class="col-sm-offset-1">
+    <label for="fieldPrice"  class="col-sm-1 control-label">ปีการศึกษา</label></div>
+    <div class="col-sm-2">
+      <select name="year" id="year" class="form-control">
+  <?PHP for($i=0; $i<=10; $i++) {?>
+  <option value="<?PHP echo date("Y")+$i+543?>" ><?PHP echo date("Y")+$i+543?></option>
+  <?PHP }?>
+  </select>
+    </div>&nbsp;<font color="red" size="5">*</font>
+  </div>
+  <!-- วัน -->
+  <div class="form-group">
+    <label for="textField" class="col-sm-2 control-label">วันที่เริ่ม</label>
+    <div class="col-sm-3 datesize">
+        <?php echo $this->tag->datefield(["datest", "size" => 30, "class" => "form-control", "id" =>"fieldPrice", "required" =>""]) ?>
+    </div>
+    <div class="col-sm-2">
+        <?php echo $this->tag->timefield(["timest", "size" => 30, "class" => "form-control", "id" =>"fieldPrice" , "placeholder" =>"เวลาที่ทำกิจกรรม", "require" =>""]) ?>
+      </div>&nbsp;<font color="red" size="5">*</font>
+  </div>
+
+  <!-- ถึง -->
+  <div class="form-group">
+      <label for="fieldPrice"  class="col-sm-2 control-label">ถึง</label>
+      <div class="col-sm-3 datesize">
+      <?php echo $this->tag->datefield(["dateed", "size" => 30, "class" => "form-control", "id" =>"fieldPrice", "require" =>""]) ?>
+      </div>
+      <div class="col-sm-2">
+          <?php echo $this->tag->timefield(["timeed", "size" => 30, "class" => "form-control", "id" =>"fieldPrice" , "placeholder" =>"เวลาที่ทำกิจกรรม", "require" =>""]) ?>
+        </div>&nbsp;<font color="red" size="5">*</font>
+  </div>
+
+    <div class="form-group">
+    <label for="fieldPrice" class="col-sm-2 control-label">สถานที่</label>
+    <div class="col-sm-4">
+      <select name="place" required="required" class="form-control">
+      <option>สถานที่</option>
+      <?php
+      $parameters["order"] = "idLocation DESC";
+      $locations = Location::find($parameters);
+      foreach ($locations as $location):?>
+      <option value="<?php echo $location->idLocation; ?>" <?php if ($activity->Location_idLocation==$location->idLocation) echo "selected" ?>><?php echo $location->LocationName ?></option>
+      <?php endforeach; ?>
+      <option value="-1" >อื่น ๆ </option>
+      </select>
+    </div>&nbsp;<font color="red" size="5">*</font>
+    </div>
+    <div class="form-group">
+      <label for="fieldPrice" class="col-sm-2 control-label">สถานที่ อื่นๆ</label>
+      <div class="col-sm-4">
+      <?php echo $this->tag->textField(["otherPlace", "size" => 30, "class" => "form-control", "id" =>"fieldName", "placeholder" =>"สถานที่อื่นๆ"]) ?>
+      </div>
+    </div><div class="form-group">
+      <div class="col-sm-2">
+        </div>
+      <div class="col-sm-4">
+      <?php echo $this->tag->textField(["otherRoom", "size" => 30, "class" => "form-control", "id" =>"fieldName", "placeholder" =>"ห้อง (ถ้ามี)"]) ?>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+    <label for="fieldPrice" class="col-sm-2 control-label">คณาจารย์ผู้รับผิดชอบ</label>
+      <div class="col-sm-4">
+        <select name="teacherID" required="required" name="year" id="year" class="form-control", "require" ="">
+        <option>เลือกคณาจารย์ผู้รับผิดชอบ</option>
+
+        <?php foreach ($teachers as $teacher):?>
+        <option value="<?php echo $teacher->idTeacher; ?>" <?php if ($activity->Teacher_idTeacher==$teacher->idTeacher) echo "selected" ?> > <?php echo $teacher->Title." ".$teacher->FirstName." ".$teacher->LastName ?></option>
+        <?php endforeach; ?>
+        </select>
+      </div>&nbsp;<font color="red" size="5">*</font>
+    </div>
+    <?php  $AHY= ActivityHaveYear::findfirst($idActivity) ?>
+
+    <div class="form-group">
+    <label for="fieldPrice" class="col-sm-2 control-label">ชั้นปีที่เข้าร่วมกิจกรรม</label>
+      <div class="col-sm-5">
+        <input type="checkbox" name="chkyear1"  checked="ture" value="1" <?php if ($AHY->activity_have_year1==1) {
+          echo "checked";
+        }?>>&nbsp; ชั้นปี 1&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" name="chkyear2"  value="2" <?php if ($AHY->activity_have_year2==1) {
+          echo "checked";
+        }?>>&nbsp; ชั้นปี 2&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" name="chkyear3"  value="3" <?php if ($AHY->activity_have_year3==1) {
+          echo "checked";
+        }?>>&nbsp; ชั้นปี 3&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" name="chkyear4"  value="4"<?php if ($AHY->activity_have_year4==1) {
+          echo "checked";
+        }?>>&nbsp; ชั้นปี 4&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+  <div class="form-group hero">
+    <div class="col-sm-6 col-sm-offset-5">
+      <?php echo $this->tag->linkTo(["teacher/activityList", "ยกเลิก","class"=>"btn btn-default"]); ?>
+      <?php echo $this->tag->submitButton(["บันทึก", "class" => "btn btn-info"]) ?>
+    </div>
+  </div>
+
+
+
+
+
+  <?php echo $this->tag->hiddenField("id"); ?>
+
+  <?php echo $this->tag->endForm(); ?>
+  </div>
+  </div>
+</div>

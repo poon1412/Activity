@@ -1,0 +1,51 @@
+<div class="pull-right">
+
+  <!-- <a href="/activity/admin/acform" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> เพิ่มกิจกรรม</a> -->
+
+  <?php echo $this->tag->linkTo(["teacher/acform", " เพิ่มกิจกรรม","class"=>"btn btn-success"]); ?>
+</div>
+<div class="page-header">
+    <h1>รายการกิจกรรม</h1>
+</div>
+
+
+
+          <div class="col-md-12 col-md-offset-0">
+
+              <div class="fresh-table toolbar-color-azure white">
+
+                  <table id="fresh-table" class="table">
+                      <thead>
+
+                        <th data-field="id" data-sortable="true">ลำดับ</th>
+                        <th data-field="name" data-sortable="true">ชื่อกิจกรรม</th>
+                        <th data-field="salary" data-sortable="true">รายละเอียด</th>
+                        <th data-field="country" data-sortable="true">วัน-เดือน-ปี</th>
+                        <th data-field="city">อาจารย์ผู้รับผิดชอบ</th>
+                        <th data-field="actions"  data-events="operateEvents" >จัดการเกี่ยวกับกิจกรรม</th>
+
+                      </thead>
+                      <tbody >
+                            <?php foreach ($page->items as $activity):
+                              $teacher = Teacher::findFirstByidTeacher($activity->Teacher_idTeacher);?>
+                          <tr>
+                            <td><?php echo $activity->idActivity ?></td>
+                            <td><b><?php echo $activity->ActivityName ?></b></td>
+                            <td><?php echo $activity->Detail ?></td>
+                            <td><?php echo $activity->StartDate ?></td>
+                            <td><?php echo $teacher->Title." ".$teacher->FirstName." ".$teacher->LastName ?></td>
+                            <td>
+                              <?php echo $this->tag->linkTo(["teacher/showac/" . $activity->idActivity, " แสดง","class"=>"btn btn-warning showwar"]); ?>
+
+                              <?php echo $this->tag->linkTo(["teacher/acedit/" . $activity->idActivity, " แก้ไข","class"=>"btn btn-default"]); ?>
+                              <?php echo $this->tag->linkTo(["teacher/acdelete/" . $activity->idActivity, " ลบ","class"=>"btn btn-danger danger"]); ?>
+
+                            </td>
+                          </tr>
+                          <?php endforeach; ?>
+                      </tbody>
+                  </table>
+              </div>
+
+
+          </div>

@@ -1,0 +1,93 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<?php use Phalcon\Tag; ?>
+<div class="page-header">
+    <h1>อาจารย์</h1>
+</div>
+
+<div class="pull-left marbot">
+  <?php echo $this->tag->linkTo(["admin/teacher", "ค้นหาผู้ใช้","class"=>"btn btn-default"]); ?>
+  <?php echo $this->tag->linkTo(["admin/search", "แสดงผู้ใช้ทั้งหมด","class"=>"btn btn-warning"]); ?>
+</div>
+
+<div class="pull-right marbot">
+  <?php echo $this->tag->linkTo(["admin/new", "เพิ่มผู้ใช้","class"=>"btn btn-success"]); ?>
+</div>
+
+<!--
+<div class="page-header">
+    <h1>อาจารย์</h1>
+</div> -->
+<!--
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous"><?php echo $this->tag->linkTo(["admin/teacher", "Go Back"]); ?></li>
+
+        </ul>
+    </nav>
+</div> -->
+
+<?php echo $this->getContent(); ?>
+<div class="col-md-12 white">
+  <div class="panel-body">
+    <table id="mytable" class="table table-hover fresh-table ">
+        <thead>
+            <tr >
+            <th class="text-center">รูปภาพ</th>
+            <th class="text-center" width="10%" data-sortable="true">รหัสอาจารย์</th>
+
+            <th class="text-center">คำนำหน้า</th>
+            <th class="text-center">ชื่อ-สกุล</th>
+            <!-- <th>Status</th> -->
+            <th class="text-center" >จัดการผู้ใช้</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($page->items as $teacher): ?>
+            <tr>
+
+                <td><img src="<?php echo $teacher->image ; ?>" class="userpic img-circle"></td>
+                <td><?php echo $teacher->idTeacher ?></td>
+                <!-- <td><?php echo $teacher->image ?></td> -->
+                <td><?php echo $teacher->Title ?></td>
+                <td><?php echo $teacher->FirstName," ",$teacher->LastName ?></td>
+                <!-- <td><?php echo $teacher->status ?></td> -->
+
+
+                <td class="text-center">
+                    <?php echo $this->tag->linkTo(["admin/edit/" . $teacher->idTeacher, " แก้ไข","class"=>"btn btn-default"]); ?>
+                    <?php echo $this->tag->linkTo(["admin/delete/" . $teacher->idTeacher, "ลบผู้ใช้","class"=>"btn btn-danger danger"]); ?>
+
+               </td>
+
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-1">
+        <p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
+            <?php echo $page->current, "/", $page->total_pages ?>
+        </p>
+    </div>
+    <div class="col-sm-11">
+        <nav>
+            <ul class="pagination">
+                <li><?php echo $this->tag->linkTo("teacher/search", "First") ?></li>
+                <li><?php echo $this->tag->linkTo("teacher/search?page=" . $page->before, "Previous") ?></li>
+                <li><?php echo $this->tag->linkTo("teacher/search?page=" . $page->next, "Next") ?></li>
+                <li><?php echo $this->tag->linkTo("teacher/search?page=" . $page->last, "Last") ?></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</div>

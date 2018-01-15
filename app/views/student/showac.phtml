@@ -1,0 +1,239 @@
+<div class= "container w-nav hero">
+
+  <div class="white">
+
+  <?php
+    echo $this->tag->form(
+        [
+          "student/activity",
+          "autocomplete" => "off",
+          "class" => "form-horizontal"
+        ] );
+  ?>
+<?php $activity = Activity::findFirstByidActivity($idActivity);?>
+   <!-- upload pic -->
+   <div class="showimg">
+       <img  src="../<?php echo $activity->image ?>"  class="acpic"/>
+   </div>
+
+   <script>
+
+   function readURL(input) {
+     if (input.files && input.files[0]) {
+       var reader = new FileReader();
+
+       reader.onload = function (e) {
+       $('#blah').attr('src',e.target.result);
+     }
+       reader.readAsDataURL(input.files[0]);
+
+     }
+     }
+
+   $("#imgInp").change(function(){
+   readURL(this);
+   });
+
+   // old default pic
+
+     // var loadFile = function(event) {
+     //   var output = document.getElementById('output');
+     //   output.src = URL.createObjectURL(event.target.files[0]);
+     //
+     // };
+   </script>
+
+   <!-- <div class="form-group">
+     <div class="col-md-4 pull-right">
+         <input type='file' id="imgInp" />
+   </div>
+   </div> -->
+  <!-- end upload pic -->
+
+
+  <div class="container-fluid">
+      <div class="page-header">
+        <h2><?php echo $activity->ActivityName ?></h2>
+      </div>
+
+
+      <div class="col-md-12 col-md-offset-2" style="margin-bottom: 40px;">
+      <div class="form-group">
+          <p for="fieldName" class="col-sm-2 control-p">กิจกรรม</p>
+          <p><?php echo $activity->ActivityName ?></p>
+      </div>
+
+      <div class="form-group">
+          <p for="fieldName" class="col-sm-2 control-p">รายละเอียดกิจกรรม</p>
+          <div class="col-sm-6">
+            <p><?php echo $activity->Detail  ?><p>
+          </div>
+      </div>
+
+      <div class="form-group">
+      <p for="fieldPrice" class="col-sm-2 control-p">ภาคการศึกษา</p>
+              <div class="col-sm-3">
+                <p><?php echo $activity->Yearofeducation_Semester."/".$activity->Yearofeducation_Year; ?></p>
+        </div>
+
+      </div>
+
+      <!-- วัน -->
+      <div class="form-group">
+        <p for="textField" class="col-sm-2 control-p">วันที่เริ่ม</p>
+        <div class="col-sm-3 datesize">
+          <p><?php echo $activity->StartDate."&nbsp&nbsp"; ?></p>
+          <?php echo " เวลา".$activity->StartTime." น."; ?>
+        </div>
+
+      </div>
+
+      <!-- ถึง -->
+      <!-- <div class="form-group">
+        <?php $activity = Activity::findFirstByidActivity($idActivity);?>
+          <p for="fieldPrice"  class="col-sm-2 control-p">ถึง</p>
+          <div class="col-sm-3 datesize">
+            <?php echo $activity->EndDate; ?>
+
+          </div>
+          <div class="col-sm-2">
+              <?php echo $activity->EndTime." น."; ?>
+          </div>
+      </div> -->
+
+        <div class="form-group">
+        <?php $location=Location::findFirstByidLocation( $activity->Location_idLocation ); ?>
+        <p for="fieldPrice" class="col-sm-2 control-p">สถานที่</p>
+        <div class="col-sm-4">
+            <p><?php echo $location->LocationName ." "; ?>
+            <?php echo $location->room; ?></p>
+        </div>
+        </div>
+
+
+
+        <div class="form-group">
+        <p for="fieldPrice" class="col-sm-2 control-p">คณาจารย์ผู้รับผิดชอบ</p>
+          <div class="col-sm-4">
+            <?php $teacherId=Teacher::findFirstByidTeacher( $activity->Teacher_idTeacher ); ?>
+            <p><?php echo $teacherId->Title ." ". $teacherId->FirstName ." ". $teacherId->LastName ?></p>
+          </div>
+        </div>
+
+        <div class="form-group">
+        <p for="fieldPrice" class="col-sm-2 control-p">ชั้นปีที่เข้าร่วมกิจกรรม</p>
+          <div class="col-sm-5">
+            <?php $year=ActivityHaveYear::findFirstByactivity_have_year_idactivity( $activity->idActivity ); ?>
+            <p><?php
+            if($year->activity_have_year1==1){
+              echo "1";
+            }
+            echo " ";
+            if($year->activity_have_year2==1){
+              echo "2";
+            }
+            echo " ";
+            if($year->activity_have_year3==1){
+              echo "3";
+            }
+            echo " ";
+            if($year->activity_have_year4==1){
+              echo "4";
+            }
+            echo " ";
+           ?></p>
+          </div>
+        </div>
+
+    <!-- <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="form-group">
+            <p for="fieldName" class="col-sm-2">ชื่อกิจกรรม</p>
+            <div class="col-sm-6">
+              <?php echo $activity->ActivityName ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <p for="fieldName" class="col-sm-4">รายละเอียดกิจกรรม</p>
+        </div>
+        <div class="col-sm-15">
+            <?php echo $activity->Detail  ?>
+          </div><br>
+        <div class="form-group">
+        <p for="fieldPrice" class="col-sm-3">ภาคการศึกษา</p>
+          <div class="col-sm-2">
+            <?php echo $activity->Yearofeducation_Semester."/".$activity->Yearofeducation_Year; ?>
+          </div>
+          <div class="col-sm-3">
+              <p for="textField" class="col-sm-8">ชั้นปีที่เข้าร่วม</p>
+              <?php $year=ActivityHaveYear::findFirstByactivity_have_year_idactivity( $activity->idActivity ); ?>
+              <?php
+              if($year->activity_have_year1==1){
+                echo "1";
+              }
+              echo " ";
+              if($year->activity_have_year2==1){
+                echo "2";
+              }
+              echo " ";
+              if($year->activity_have_year3==1){
+                echo "3";
+              }
+              echo " ";
+              if($year->activity_have_year4==1){
+                echo "4";
+              }
+              echo " ";
+             ?>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p for="textField" class="col-sm-3">วันที่ทำกิจกรรม</p>
+          <div class="col-sm-2">
+              <?php echo $activity->StartDate; ?>
+            </div>
+            <div class="col-sm-2">
+                <p for="textField" class="col-sm-2">เวลา</p>
+              </div>
+              <div class="col-sm-3">
+                  <?php echo $activity->StartTime." น."; ?>
+                </div>
+          </div>
+          <?php $location=Location::findFirstByidLocation( $activity->Location_idLocation ); ?>
+          <div class="form-group">
+            <p for="textField" class="col-sm-3">สถานที่</p>
+            <div class="col-sm-2">
+              <?php echo $location->LocationName ." "; ?>
+              </div>
+              <div class="col-sm-2">
+                  <p for="textField" class="col-sm-2">ห้อง</p>
+                </div>
+                <div class="col-sm-3">
+                    <?php echo $location->room; ?>
+                  </div>
+            </div>
+          <div class="form-group">
+          <p for="fieldPrice" class="col-sm-4">คณาจารย์ผู้รับผิดชอบ</p>
+            <div class="col-sm-5">
+              <?php $teacherId=Teacher::findFirstByidTeacher( $activity->Teacher_idTeacher ); ?>
+              <?php echo $teacherId->Title ." ". $teacherId->FirstName ." ". $teacherId->LastName ?>
+            </div>
+          </div>
+      </div>
+    </div> -->
+
+    <div class="form-group">
+      <div class="col-sm-8 pull-right">
+        <?php echo $this->tag->linkTo(["student/activityList", "ตกลง","class"=>"btn btn-default searchbut"]); ?>
+
+      </div>
+    </div>
+    <?php echo $this->tag->hiddenField("id"); ?>
+
+    <?php echo $this->tag->endForm(); ?>
+        </div>
+      </div>
+    </div>
+</div>
+<br>

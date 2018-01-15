@@ -1,0 +1,92 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<?php $std= Student::findFirstByidStudent($id) ?>
+<div class="white">
+  <div class="container-fluid">
+
+    <div class="page-header">
+      <h3>ผู้เข้าร่วมกิจกรรม</h3>
+    </div>
+    <div class="col-sm-12"style="padding-bottom: 30px;">
+      <div class="col-sm-4 text-center" >
+          <img src="../<?php echo $std->image; ?>" width="200px" class="img-circle">
+      </div>
+        <div class="col-sm-6">
+          <h4><?php echo $std->idStudent; ?></h4> </div>
+        <div class="col-sm-6"><h5><?php echo $std->Title." ".$std->FirstName." ".$std->LastName; ?></h5></div>
+        <div class="col-sm-6"><h5>ชั้นปีที่ <?php echo $std->year; ?></h5></div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="white" style="margin-top : 30px">
+    <div class="container-fluid">
+
+        <div class="page-header">
+          <h3>ประวัติการเข้าร่วมกิจกรรม</h3>
+        </div>
+
+
+        <?php echo $this->getContent(); ?>
+
+        <div class="col-md-12">
+          <div class="panel-body">
+            <table id="mytable" class="table table-hover fresh-table">
+                <thead>
+                    <tr>
+                      <th>ลำดับ</th>
+                      <th>รูปภาพ</th>
+                      <th>ชื่อกิจกรรม</th>
+                      <th class="text-center">รายละเอียด</th>
+                      <th>วัน-เดือน-ปี</th>
+                      <th class="text-center">อาจารย์ผู้รับผิดชอบ</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                foreach ($page->items as $xs):
+                  $activity= Activity::findFirstByidActivity($xs->activity_have_year_idactivity);
+                  ?>
+                    <tr>
+                    <td ><?php echo $activity->idActivity ?></td>
+                    <td><img src="../<?php echo $activity->image ?>" class="userpic img-round"></td>
+                    <td ><?php echo $activity->ActivityName ?></td>
+                    <td ><?php echo $activity->Detail ?></td>
+                    <td><?php echo $activity->StartDate ?></td>
+                    <td><?php $teacher = Teacher::findFirstByidTeacher($activity->Teacher_idTeacher); echo $teacher->Title." ".$teacher->FirstName." ".$teacher->LastName ?></td>
+
+
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1">
+                <p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
+
+                    <?php echo $page->current, "/", $page->total_pages ?>
+                </p>
+            </div>
+            <div class="col-sm-11">
+                <nav>
+                    <ul class="pagination">
+                        <li><?php echo $this->tag->linkTo("/admin/joinac", "First") ?></li>
+                        <li><?php echo $this->tag->linkTo("/admin/joinac?page=" .$page->before, "Previous") ?></li>
+                        <li><?php echo $this->tag->linkTo("/admin/joinac?page=" .$page->next, "Next") ?></li>
+                        <li><?php echo $this->tag->linkTo("/admin/joinac?page=" .$page->last, "Last") ?></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        </div>
+      </div>
+</div>

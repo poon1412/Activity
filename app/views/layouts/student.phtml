@@ -1,0 +1,59 @@
+<?php $this->flashSession->output() ?>
+<nav class="navbar navbar-default" style="padding-top: 20px;">
+  <div class="container w-nav">
+    <!-- Brand and toggle get grouped for better mobile display -->
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <?php echo $this->tag->linkTo(["home", "SwEtc.","class"=>"navbar-brand"]); ?>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <?php $admin=Teacher::findFirstByidTeacher( $this->session->get("login")); ?>
+<?php if($this->session->has("login")){ ?>
+        <?php if ($admin->status==1){?>
+                <li><?php echo $this->tag->linkTo(["admin/activityList", "รายการกิจกรรม"]); ?></li>
+              <?php }else{ ?>
+                <li><?php echo $this->tag->linkTo(["teacher/activityList", "รายการกิจกรรม"]); ?></li>
+       <?php } ?>
+<?php } ?>
+      </ul>
+      <?php if($this->session->has("login")){  ?>
+        <ul class="nav navbar-nav navbar-right">
+          <ul class="nav nav-pills">
+          <li class="active top"><?php echo $this->tag->linkTo(["login/logout", "ออกจากระบบ"]) ?></li>
+        </ul>
+        </ul>
+          <?php }else{?>
+      <ul class="nav navbar-nav navbar-right">
+        <ul class="nav nav-pills">
+        <li class="active top"><?php echo $this->tag->linkTo(["login/login", "ลงชื่อเข้าใช้"]) ?></li>
+      </ul>
+        <?php }?>
+
+      </ul>
+    </div>
+  </div><!-- /.container-fluid -->
+</nav>
+<?php echo $this->getContent(); ?>
+
+<!-- <button type="button" class="btn btn-success navbar-btn"><?php echo $this->tag->linkTo(["User/login", "Login"]) ?></button> -->
+
+
+<footer class="container-fluid text-center bg-lightgray">
+
+        <div class="copyrights" style="margin-top:25px;">
+            <p>Phalcon project © 2016, All Rights Reserved
+                <br>
+                <span>Web Design By: Who!</span></p>
+            <p><?php echo $this->tag->linkTo(["home", "Home"]) ?></p>
+        </div>
+</footer>
