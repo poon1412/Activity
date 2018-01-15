@@ -312,20 +312,13 @@ public function acdeleteAction($id)
     public function showstdAction($y)
     {
       $numberPage = $this->request->getQuery("page", "int");
-      if($y > 4)
-      {
-        $student = Student::find(
-        [
-          "year >".$y,
-        ]
-        );
-      }else{
+      
       $student = Student::find(
       [
         "year =".$y,
       ]
       );
-}
+    
       $paginator = new Paginator([
         'data' => $student,
         'limit'=> 50,

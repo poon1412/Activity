@@ -31,6 +31,7 @@
               <th>รหัสนักศึกษา</th>
             <th>คำนำหน้า</th>
             <th class="text-center" >ชื่อ-สกุล</th>
+            <th width="10%">ปีการศึกษา</th>
             <th width="10%">ชั้นปี</th>
             <th class="text-center" >จัดการผู้ใช้</th>
 
@@ -45,7 +46,7 @@
             <td width="10%"><?php echo $student->Title ?></td>
             <td><?php echo $student->FirstName," ",$student->LastName ?></td>
             <td><?php echo $student->year ?></td>
-
+            <td><?php echo (2560-$student->year+1) ?></td>
             <td class="text-center" >
               <?php echo $this->tag->linkTo(["admin/stedit/" .$student->idStudent, "แก้ไข","class"=>"btn btn-default"]); ?>
               <?php echo $this->tag->linkTo(["admin/stdelete/" .$student->idStudent, "ลบผู้ใช้","class"=>"btn btn-danger danger"]); ?>

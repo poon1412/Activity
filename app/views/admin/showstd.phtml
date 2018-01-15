@@ -22,8 +22,8 @@
               <th data-field="idStudent" data-sortable="true">รหัสนักศึกษา</th>
               <th data-field="Title" data-sortable="true">คำนำหน้า</th>
               <th data-field="FirstName" data-sortable="true">ชื่อ - สกุล</th>
-
-              <th data-field="year" data-sortable="true">ชั้นปี</th>
+              <th data-field="year" data-sortable="true">ปีการศึกษา</th>
+              <th data-field="yearStd" data-sortable="true">ชั้นปี</th>
               <th data-field="actions" data-events="operateEvents">ประวัติการเข้าร่วมกิจกรรม</th>
 
 
@@ -37,8 +37,9 @@
                   <td><?php echo $student->Title ?></td>
                   <td><?php echo $student->FirstName." ".$student->LastName ?></td>
                   <td><?php echo $student->year ?></td>
+                  <td><?php echo (2560-$student->year+1) ?></td>
                   <td>
-                    <?php echo $this->tag->linkTo(["admin/joinac/" . $student->idStudent, "การเข้าร่วมกิจกรรม","class"=>"btn btn-default searchbut"]); ?>
+                    <?php echo $this->tag->linkTo(["teacher/joinac/" . $student->idStudent, "การเข้าร่วมกิจกรรม","class"=>"btn btn-default searchbut"]); ?>
                   </td>
                 </tr>
                 <?php endforeach; ?>

@@ -314,20 +314,12 @@ $activitys = Activity::findFirst($id);
   public function showstdAction($x)
   {
     $numberPage = $this->request->getQuery("page", "int");
-    if($x > 4)
-    {
-      $student = Student::find(
-      [
-        "year >".$x,
-      ]
-      );
-    }else{
     $student = Student::find(
     [
       "year =".$x,
     ]
     );
-  }
+  
     $paginator = new Paginator([
       'data' => $student,
       'limit'=> 50,
