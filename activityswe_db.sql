@@ -25,9 +25,7 @@ CREATE TABLE `activity` (
   PRIMARY KEY (`idActivity`),
   KEY `fk_Activity_Teacher1_idx` (`Teacher_idTeacher`),
   KEY `fk_Activity_Location1_idx` (`Location_idLocation`),
-  KEY `fk_Activity_Type1_idx` (`Type_idType`),
-  CONSTRAINT `fk_Activity_Teacher1` FOREIGN KEY (`Teacher_idTeacher`) REFERENCES `teacher` (`idTeacher`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Activity_Type1` FOREIGN KEY (`Type_idType`) REFERENCES `type` (`idType`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Activity_Type1_idx` (`Type_idType`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `activity` (`idActivity`, `ActivityName`, `Detail`, `StartDate`, `StartTime`, `EndDate`, `Endtime`, `Teacher_idTeacher`, `Location_idLocation`, `Type_idType`, `Yearofeducation_Semester`, `Yearofeducation_Year`, `image`) VALUES
@@ -59,9 +57,7 @@ CREATE TABLE `activity_has_student` (
   `Student_idStudent` varchar(8) NOT NULL,
   PRIMARY KEY (`Activity_idActivity`,`Student_idStudent`),
   KEY `fk_Activity_has_Student_Student1_idx` (`Student_idStudent`),
-  KEY `fk_Activity_has_Student_Activity1_idx` (`Activity_idActivity`),
-  CONSTRAINT `fk_Activity_has_Student_Activity1` FOREIGN KEY (`Activity_idActivity`) REFERENCES `activity` (`idActivity`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Activity_has_Student_Student1` FOREIGN KEY (`Student_idStudent`) REFERENCES `student` (`idStudent`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Activity_has_Student_Activity1_idx` (`Activity_idActivity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `activity_has_student` (`Activity_idActivity`, `Student_idStudent`) VALUES
@@ -236,4 +232,4 @@ INSERT INTO `type` (`idType`, `TypeNamel`) VALUES
 (4,	'นันทนาการบริการอาสาสมัคร'),
 (5,	'ทัศนศึกษา');
 
--- 2018-01-15 14:15:06
+-- 2018-01-16 10:02:53
