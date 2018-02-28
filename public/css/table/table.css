@@ -648,12 +648,24 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   border-color: #FF9500;
   color: #FF9500;
 }
-.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open > .btn-warning.dropdown-toggle {
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, 
+.btn-warning.active, .open > .btn-warning.dropdown-toggle {
   background-color: transparent;
   color: #ED8D00;
   border-color: #ED8D00;
 }
-.btn-warning.disabled, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled.focus, .btn-warning.disabled:active, .btn-warning.disabled.active, .btn-warning:disabled, .btn-warning:disabled:hover, .btn-warning:disabled:focus, .btn-warning:disabled.focus, .btn-warning:disabled:active, .btn-warning:disabled.active, .btn-warning[disabled], .btn-warning[disabled]:hover, .btn-warning[disabled]:focus, .btn-warning[disabled].focus, .btn-warning[disabled]:active, .btn-warning[disabled].active, fieldset[disabled] .btn-warning, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, fieldset[disabled] .btn-warning.focus, fieldset[disabled] .btn-warning:active, fieldset[disabled] .btn-warning.active {
+.btn-warning.disabled, .btn-warning.disabled:hover, 
+.btn-warning.disabled:focus, .btn-warning.disabled.focus, 
+.btn-warning.disabled:active, .btn-warning.disabled.active, 
+.btn-warning:disabled, .btn-warning:disabled:hover, 
+.btn-warning:disabled:focus, .btn-warning:disabled.focus, 
+.btn-warning:disabled:active, .btn-warning:disabled.active, 
+.btn-warning[disabled], .btn-warning[disabled]:hover, 
+.btn-warning[disabled]:focus, .btn-warning[disabled].focus, 
+.btn-warning[disabled]:active, .btn-warning[disabled].active, fieldset[disabled] 
+.btn-warning, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, 
+fieldset[disabled] .btn-warning.focus, fieldset[disabled] .btn-warning:active, fieldset[disabled] 
+.btn-warning.active {
   background-color: transparent;
   border-color: #FF9500;
 }
