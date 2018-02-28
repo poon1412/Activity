@@ -34,12 +34,15 @@ class AdminController extends \Phalcon\Mvc\Controller
     {
       $numberPage = $this->request->getQuery("page", "int");
       $parameters["order"] = "idActivity DESC";
+      
       $activity = Activity::find($parameters);
+     
       $paginator = new Paginator([
         'data' => $activity,
         'limit'=> 50,
         'page' => $numberPage
       ]);
+      
       $this->view->page = $paginator->getPaginate();
     }
 
@@ -296,6 +299,7 @@ public function acdeleteAction($id)
       if (!$this->request->isPost()) {
 
           $activity = Activity::findFirstByidActivity($idActivity);
+         
           if (!$activity) {
               $this->flash->error("Activity was not found");
 
